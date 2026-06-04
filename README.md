@@ -1,8 +1,8 @@
-# ⚡ StandupSync — Team Standup Logger
+# Standup — Team Standup Logger
 
 > A lightweight internal tool for async daily standups — post updates, see your team's activity live, and monitor productivity trends on a dashboard.
 
-![StandupSync Feed](./client/syncUp/src/assets/Screenshot%202026-06-04%20145208.png)
+![Standup Feed](./client/syncUp/src/assets/Screenshot%202026-06-04%20145208.png)
 
 ---
 
@@ -27,7 +27,7 @@
 ### 1. Backend (Flask)
 
 ```bash
-cd backend
+cd server
 
 # Install dependencies
 pip install flask flask-cors flask-sqlalchemy
