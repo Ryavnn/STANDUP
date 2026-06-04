@@ -1,5 +1,6 @@
 import {useState} from "react"
 import {useForm} from 'react-hook-form';
+import { toast } from "react-toastify";
 const FeedForm = () => {
     const [hasBlocker, setHasBlocker] = useState(false);
     const {
@@ -31,18 +32,18 @@ const FeedForm = () => {
 
             const result = await response.json()
             if (!response.ok){
-                throw new Error(`${response.status}`)
+                toast.error(result.error || "Something went wrong");
             }
 
-            console.log(result)
-                reset();
-                setHasBlocker(false);
+            toast.success("Standup submitted successfully");
+            reset();
+            setHasBlocker(false);
         } catch (error){
             console.error("Error submitting form:", error)
         }
     }
   return (
-    <div className="feed-form flex flex-col gap-4 p-5 w-92 shadow-md rounded-md">
+    <div className="feed-form flex flex-col gap-4 p-5 w-92 shadow-md rounded-md sticky top-5">
       <form
         className="form w-full flex flex-col gap-4"
         onSubmit={handleSubmit(onSubmit)}
