@@ -36,7 +36,7 @@ pip install flask flask-cors flask-sqlalchemy
 python app.py
 ```
 
-The API will be available at `https://standup-e6ai.onrender.com/standups/`.
+The API will be available at `http://localhost:5000`.
 
 ### 2. Frontend (React + Vite)
 

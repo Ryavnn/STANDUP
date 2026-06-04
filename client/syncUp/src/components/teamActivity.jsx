@@ -30,13 +30,12 @@ const TeamActivity = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const url = "https://standup-e6ai.onrender.com/standups/stats/";
+    const url = "http://localhost:5000/standups/stats/";
     const fetchStats = async () => {
       try {
         const response = await fetch(url);
         if (!response.ok) throw new Error(response.status);
         const results = await response.json();
-        // Augment each day with an "active" count = posts that had no blocker
         const enriched = results.map((d) => ({
           ...d,
           active: d.posts - d.blockers,

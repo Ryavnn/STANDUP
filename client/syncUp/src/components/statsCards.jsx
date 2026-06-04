@@ -27,8 +27,8 @@ const StatsCards = () => {
 
   useEffect(() => {
     const load = async () => {
-      const STATS_URL = "https://standup-e6ai.onrender.com/standups/stats/";
-      const FEED_URL = "https://standup-e6ai.onrender.com/standups/";
+      const STATS_URL = "http://localhost:5000/standups/stats/";
+      const FEED_URL = "http://localhost:5000/standups/";
       try {
         const [statsRes, feedRes] = await Promise.all([
           fetch(STATS_URL),

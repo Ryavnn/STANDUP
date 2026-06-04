@@ -2,25 +2,13 @@ from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timedelta
-from dotenv import load_dotenv
 import os, uuid
-
-# ---------------------------------------------------------------------------
-# Load environment variables from .env (ignored in production where env vars
-# are injected directly by the hosting platform, e.g. Render)
-# ---------------------------------------------------------------------------
-load_dotenv()
-
-DATABASE_URL = os.environ.get("DATABASE_URL")
-if not DATABASE_URL:
-    raise RuntimeError("DATABASE_URL is not set. Add it to backend/.env or your environment.")
 
 app = Flask(__name__)
 CORS(app)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-# Render sometimes provides a "postgres://" URI; SQLAlchemy needs "postgresql://"
-app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(BASE_DIR, 'standups.db')}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = os.path.join(BASE_DIR, 'uploads')
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
@@ -98,7 +86,7 @@ def create_standup():
         author=author, yesterday=yesterday, today=today,
         blockers=blockers, has_blocker=has_blocker, file_attachment=file_attachment
     )
-    # Prevent duplicate submissions (same user + same content within 1 minute)
+    
     recent_post = StandupPost.query.filter(
         StandupPost.author == author,
         StandupPost.yesterday == yesterday,

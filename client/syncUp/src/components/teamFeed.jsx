@@ -7,7 +7,7 @@ const TeamFeed = () => {
   const fetchStandup = async () => {
     try {
       const response = await fetch(
-        "https://standup-e6ai.onrender.com/standups/",
+        "http://localhost:5000/standups/",
       );
       const data = await response.json();
       setStandups(data);

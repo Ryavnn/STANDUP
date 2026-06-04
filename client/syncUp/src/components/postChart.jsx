@@ -3,7 +3,7 @@ import {BarChart,Bar, ResponsiveContainer, XAxis,YAxis,Tooltip} from "recharts"
 const PostChart = () => {
   const [data,setData] = useState([])
     useEffect(()=>{
-        const url = "https://standup-e6ai.onrender.com/standups/stats/"
+        const url = "http://localhost:5000/standups/stats/"
         const fetchStats = async ()=>{
           try{
             const response = await fetch(url)
