@@ -1,5 +1,5 @@
 import { IoReload } from "react-icons/io5";
-const LiveNav = () => {
+const LiveNav = ({ onRefresh }) => {
   return (
     <>
       <div className="live-nav-cont flex items-center justify-between w-full h-12 ">
@@ -7,7 +7,7 @@ const LiveNav = () => {
             Team Live Feed
             <span className="feed-count font-body text-secondary text-sm">Feed refreshes every 10 seconds</span>
         </div>
-        <div className="refresh btn flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-xl text-[18px] cursor-pointer">
+        <div onClick={onRefresh} className="refresh btn flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-xl text-[18px] cursor-pointer">
             <IoReload />
           Refresh
         </div>

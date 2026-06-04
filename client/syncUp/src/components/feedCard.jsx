@@ -1,25 +1,6 @@
-import {useState, useEffect} from "react"
-const FeedCard = () => {
-  const [standups, setStandups] = useState([])
-  const fetchStandup = async ()=>{
-    try{
-      const response= await fetch("http://localhost:5000/standups/")
-      const data = await response.json()
-      setStandups(data)
-    }catch(error){
-      console.error("Error fetching standup data:", error)
-    }
-  }
 
-  useEffect(()=>{
-    fetchStandup()
+const FeedCard = ({ standups }) => {
 
-    const interval = setInterval(()=>{
-      fetchStandup()
-    }, 10000) 
-
-    return () => clearInterval(interval)
-  }, [])
   return (
     <>
       {standups.map((e) => (

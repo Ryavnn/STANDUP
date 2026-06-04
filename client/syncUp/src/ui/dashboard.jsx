@@ -1,9 +1,17 @@
-const dashboard = () => {
+import BlockerTrend from "../components/blockerTrend"
+import Navbar from "../components/navbar"
+import PostChart from "../components/postChart"
+
+const Dashboard = () => {
   return (
-    <div>
-      
-    </div>
+    <>
+      <Navbar />
+      <div className="charts w-full h-full flex flex-col p-5">
+        <PostChart />
+        <BlockerTrend />
+      </div>
+    </>
   )
 }
 
-export default dashboard
+export default Dashboard

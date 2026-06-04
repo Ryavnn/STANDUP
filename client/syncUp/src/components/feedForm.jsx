@@ -5,7 +5,8 @@ const FeedForm = () => {
     const {
         register,
         handleSubmit,
-        formState:{errors}
+        formState:{errors},
+        reset
     } = useForm();
     const onSubmit = async (data) =>{
         try{
@@ -20,10 +21,13 @@ const FeedForm = () => {
                 formData.append("file", data.file[0])
             }
 
-            const response = await fetch("http://localhost:5000/standups/",{
+            const response = await fetch(
+              "https://standup-e6ai.onrender.com/standups/",
+              {
                 method: "POST",
-                body: formData
-            })
+                body: formData,
+              },
+            );
 
             const result = await response.json()
             if (!response.ok){
@@ -31,6 +35,8 @@ const FeedForm = () => {
             }
 
             console.log(result)
+                reset();
+                setHasBlocker(false);
         } catch (error){
             console.error("Error submitting form:", error)
         }
