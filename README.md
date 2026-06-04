@@ -30,7 +30,7 @@
 cd server
 
 # Install dependencies
-pip install flask flask-cors flask-sqlalchemy
+pip install -r requirements.txt
 
 # Run the server (creates standups.db automatically)
 python app.py
