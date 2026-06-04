@@ -98,6 +98,19 @@ def create_standup():
         author=author, yesterday=yesterday, today=today,
         blockers=blockers, has_blocker=has_blocker, file_attachment=file_attachment
     )
+    # Prevent duplicate submissions (same user + same content within 1 minute)
+    recent_post = StandupPost.query.filter(
+        StandupPost.author == author,
+        StandupPost.yesterday == yesterday,
+        StandupPost.today == today,
+        StandupPost.blockers == blockers,
+        StandupPost.timestamp >= datetime.utcnow() - timedelta(minutes=10)
+    ).first()
+
+    if recent_post:
+        return jsonify({
+            "error": "Duplicate submission detected. Please wait before resubmitting."
+        }), 409
     db.session.add(post)
     db.session.commit()
     return jsonify(post.to_dict()), 201
