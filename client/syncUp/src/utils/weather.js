@@ -1,33 +1,24 @@
-import { fetchWeatherApi } from "openmeteo";
-
-const BASE_URL = "https://api.open-meteo.com/v1/forecast";
-
 export const getCurrentWeather = async (latitude, longitude) => {
-  const params = {
-    latitude,
-    longitude,
-    current: ["temperature_2m", "weather_code"],
-    timezone: "auto",
-  };
+  const url = `https://wttr.in/${latitude},${longitude}?format=j1`;
+  const res = await fetch(url);
+  const data = await res.json();
 
-  const responses = await fetchWeatherApi(BASE_URL, params);
-  const response = responses[0];
-
-  const current = response.current();
+  const temp = data.current_condition[0].temp_C;
+  const code = parseInt(data.current_condition[0].weatherCode);
 
   return {
-    temperature: current.variables(0).value(),
-    weatherCode: current.variables(1).value(),
+    temperature: parseInt(temp),
+    weatherCode: code,
   };
 };
 
+
 export const getWeatherCondition = (code) => {
-  if (code === 0) return "Clear";
-  if (code <= 3) return "Cloudy";
-  if (code <= 48) return "Fog";
-  if (code <= 67) return "Rain";
-  if (code <= 77) return "Snow";
-  if (code <= 82) return "Showers";
-  if (code <= 86) return "Snow";
+  if (code === 113) return "Clear";
+  if (code <= 119) return "Cloudy";
+  if (code <= 143) return "Fog";
+  if (code <= 266) return "Rain";
+  if (code <= 338) return "Snow";
+  if (code <= 377) return "Showers";
   return "Unknown";
 };

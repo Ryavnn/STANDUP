@@ -12,7 +12,7 @@
 - **Live Activity Feed** — Polls for new posts every 10 seconds, no page refresh needed
 - **Blocker Flagging** — Team members flag blockers; cards are highlighted in red for visibility
 - **Productivity Dashboard** — Bar chart, blocker trend line, stat cards, and daily breakdown table
-- **Weather Integration** — Live temperature + condition via Open-Meteo (no API key required)
+- **Weather Integration** — Live temperature + condition via wttr.in (no API key required)
 - **Error States** — Graceful fallback UI for all API failures
 
 ---
@@ -59,12 +59,12 @@ Open `http://localhost:5173` in your browser.
 
 ## Third-Party APIs
 
-### Open-Meteo (Weather)
+### wttr.in (Weather)
 
-- **URL**: `https://api.open-meteo.com/v1/forecast`
+- **URL**: `https://wttr.in/${latitude},${longitude}?format=j1`
 - **No API key required**
 - Fixed city: **Nairobi, Kenya** (lat: -1.286, lon: 36.817)
-- Displays temperature (°C) + WMO weather code → icon + label
+- Displays temperature (°C) + weather condition → icon + label
 - If the API call fails, a "Weather unavailable" fallback is shown
 
 
@@ -81,5 +81,5 @@ Layer - Technology
 Backend - Python, Flask, SQLAlchemy, SQLite
 Frontend - React 18, Vite 5, TailwindCSS v3 
 Charts - Recharts
-Weather - Open-Meteo API 
+Weather - wttr.in API 
 Date utils - date-fns 
